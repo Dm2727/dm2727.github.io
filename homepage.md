@@ -1,0 +1,20 @@
+<marquee> Dm2727+ is available https://chat.whatsapp.com/D1rlBXvwJVAJnZNFcu1fjX https://discord.gg/PUXdwWe4U </marquee>
+
+function formatNow() {
+  const d = new Date();
+
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth() + 1).padStart(2, "0");
+  const dd = String(d.getDate()).padStart(2, "0");
+
+  const hh = String(d.getHours()).padStart(2, "0");
+  const min = String(d.getMinutes()).padStart(2, "0");
+  const ss = String(d.getSeconds()).padStart(2, "0");
+
+  const ms = String(d.getMilliseconds()).padStart(3, "0");
+
+  return `${yyyy}/${mm}/${dd} ${hh}:${min}:${ss}.${ms}`;
+}
+
+console.log(formatNow());
+Here's a very accurate clock

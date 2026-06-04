@@ -1,4 +1,4 @@
-<marquee> Dm2727+ is available https://chat.whatsapp.com/D1rlBXvwJVAJnZNFcu1fjX https://discord.gg/PUXdwWe4U </marquee>
+<marquee> Dm2727+ is available https://chat.whatsapp.com/D1rlBXvwJVAJnZNFcu1fjX https://discord.gg/PUXdwWe4U https://reddit.com/r/Dm2727 </marquee>
 
 <div style="
   width: 100%;

@@ -1,4 +1,4 @@
-<div style="font-family: 'Arial Rounded MT Bold', 'Arial Rounded MT',
+
   <div style="
   width: 100%;
   background: #d40000;
@@ -56,4 +56,3 @@
     ONLINE: how many? 
   </div>
 </div> 
-</div>

@@ -1,6 +1,5 @@
-```html
 <div style="
-    font-family:'Arial Rounded MT Bold','Arial Rounded MT',Arial,sans-serif;
+    font-family:'Aptos Display',Aptos,'Segoe UI',sans-serif;
     background:#0d1117;
     color:#c9d1d9;
     padding:40px;
@@ -8,8 +7,6 @@
     max-width:1400px;
     margin:auto;
 ">
-
-    <!-- HERO SECTION -->
 
     <div style="
         text-align:center;
@@ -22,12 +19,12 @@
 
         <div style="
             font-size:64px;
-            font-weight:bold;
+            font-weight:700;
             color:white;
             margin-bottom:10px;
             letter-spacing:2px;
         ">
-            Philippine Siren Archive
+            PhilippineSirens
         </div>
 
         <div style="
@@ -37,9 +34,7 @@
             margin:auto;
             line-height:1.8;
         ">
-            Documenting, mapping, identifying, and preserving warning sirens
-            across the Philippines while connecting enthusiasts worldwide
-            through dedicated siren communities and research projects.
+            pretty self-explanatory when u/SunFlowerz0 started it. has post flair like r/AirRaidSirens
         </div>
 
         <div style="
@@ -59,9 +54,10 @@
                    border-radius:15px;
                    text-decoration:none;
                    font-size:20px;
-                   font-weight:bold;
+                   font-weight:700;
+                   display:inline-block;
                ">
-               Open Google Earth Project
+               Map here 
             </a>
 
             <a href="https://reddit.com/r/PhilippineSirens"
@@ -73,16 +69,15 @@
                    border-radius:15px;
                    text-decoration:none;
                    font-size:20px;
-                   font-weight:bold;
+                   font-weight:700;
+                   display:inline-block;
                ">
-               Join Community
+               Join
             </a>
 
         </div>
 
     </div>
-
-    <!-- INFORMATION GRID -->
 
     <div style="
         display:grid;
@@ -91,30 +86,21 @@
         margin-top:40px;
     ">
 
-        <!-- GOOGLE EARTH -->
-
         <div style="
             background:#161b22;
             border:2px solid #58a6ff;
             border-radius:25px;
             padding:35px;
+            box-shadow:0 0 25px rgba(88,166,255,.15);
         ">
-
-            <div style="
-                font-size:42px;
-                color:white;
-                margin-bottom:15px;
-                font-weight:bold;
-            ">
-                r/PhilippineSire
-            </div>
 
             <div style="
                 font-size:18px;
                 color:#58a6ff;
                 margin-bottom:20px;
+                font-weight:600;
             ">
-                Google Earth Mapping Project
+                r/PhilippineSirens Map
             </div>
 
             <div style="
@@ -125,7 +111,7 @@
 
                 <br><br>
 
-                1.7.3 released
+                Version 1.7.3 released
 
                 <br><br>
 
@@ -133,8 +119,6 @@
             </div>
 
         </div>
-
-        <!-- PHILIPPINE SIRENS -->
 
         <div style="
             background:#161b22;
@@ -147,7 +131,7 @@
                 font-size:42px;
                 color:white;
                 margin-bottom:15px;
-                font-weight:bold;
+                font-weight:700;
             ">
                 r/PhilippineSirens
             </div>
@@ -156,6 +140,7 @@
                 font-size:18px;
                 color:#58a6ff;
                 margin-bottom:20px;
+                font-weight:600;
             ">
                 me country full of sirens
             </div>
@@ -177,8 +162,6 @@
 
         </div>
 
-        <!-- AIR RAID -->
-
         <div style="
             background:#161b22;
             border:2px solid #30363d;
@@ -190,7 +173,7 @@
                 font-size:42px;
                 color:white;
                 margin-bottom:15px;
-                font-weight:bold;
+                font-weight:700;
             ">
                 r/AirRaidSirens
             </div>
@@ -199,8 +182,9 @@
                 font-size:18px;
                 color:#58a6ff;
                 margin-bottom:20px;
+                font-weight:600;
             ">
-                cold war? 
+                cold war?
             </div>
 
             <div style="
@@ -216,8 +200,6 @@
 
         </div>
 
-        <!-- TORNADO -->
-
         <div style="
             background:#161b22;
             border:2px solid #30363d;
@@ -229,7 +211,7 @@
                 font-size:42px;
                 color:white;
                 margin-bottom:15px;
-                font-weight:bold;
+                font-weight:700;
             ">
                 r/TornadoSirens
             </div>
@@ -238,6 +220,7 @@
                 font-size:18px;
                 color:#58a6ff;
                 margin-bottom:20px;
+                font-weight:600;
             ">
                 tornado vs air raid
             </div>
@@ -257,8 +240,6 @@
 
     </div>
 
-    <!-- FOOTER -->
-
     <div style="
         margin-top:50px;
         text-align:center;
@@ -267,8 +248,7 @@
         border-top:1px solid #30363d;
         padding-top:30px;
     ">
-        Philippine Siren Archive • Google Earth Mapping • Historical Research • Community Preservation
+        r/PhilippineSirens • r/PhilippineSirens Map 1.7.3 • other siren subreddits
     </div>
 
 </div>
-```

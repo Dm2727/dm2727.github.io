@@ -1,173 +1,84 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>CLOCKEEY</title>
-  <style>
-    body {
-      font-family: "Arial Rounded MT Bold", "Arial Rounded MT", Arial, sans-serif;
-      background: #0d1117;
-      color: #c9d1d9;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      gap: 25px;
-    }
+<script>
+  function pad(n, s) {
+    return String(n).padStart(s, "0");
+  }
 
-    #digital {
-      font-size: 26px;
-      letter-spacing: 1px;
-    }
+  // MTWTFSS order
+  const days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
+  const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
-    #calendar {
-      font-size: 20px;
-      color: #8b949e;
-    }
+  // Convert JS Sunday=0 to Monday=0
+  function getDayMTWTFSS(d) {
+    return days[(d.getDay() + 6) % 7];
+  }
 
-    .clock {
-      width: 280px;
-      height: 280px;
-      border: 6px solid #30363d;
-      border-radius: 50%;
-      position: relative;
-      background: #111820;
-      box-shadow: 0 0 12px #000;
-    }
+  // Day of year
+  function getDayOfYear(d) {
+    const start = new Date(d.getFullYear(), 0, 1);
+    const diff = d - start;
+    return Math.floor(diff / 86400000) + 1;
+  }
 
-    .number {
-      position: absolute;
-      font-size: 20px;
-      font-weight: bold;
-      color: #c9d1d9;
-      transform: translate(-50%, -50%);
-    }
+  // ISO week number (Monday-based)
+  function getISOWeek(d) {
+    const date = new Date(d.getTime());
+    date.setHours(0,0,0,0);
 
-    .hand {
-      position: absolute;
-      width: 50%;
-      height: 2px;
-      background: #c9d1d9;
-      top: 50%;
-      left: 50%;
-      transform-origin: 0% 50%;
-    }
+    // Thursday of this week determines the year
+    date.setDate(date.getDate() + 3 - ((date.getDay() + 6) % 7));
 
-    #hour {
-      height: 4px;
-      width: 30%;
-      background: #58a6ff;
-    }
+    const week1 = new Date(date.getFullYear(), 0, 4);
+    return 1 + Math.round(((date - week1) / 86400000 - 3 + ((week1.getDay() + 6) % 7)) / 7);
+  }
 
-    #minute {
-      height: 3px;
-      width: 40%;
-      background: #8b949e;
-    }
+  // Quarter (1–4)
+  function getQuarter(d) {
+    return Math.floor(d.getMonth() / 3) + 1;
+  }
 
-    #second {
-      height: 2px;
-      width: 45%;
-      background: #ff7b72;
-    }
+  function updateDigitalAndCalendar(now) {
+    const t =
+      now.getFullYear() + "/" +
+      pad(now.getMonth() + 1, 2) + "/" +
+      pad(now.getDate(), 2) + " " +
+      pad(now.getHours(), 2) + ":" +
+      pad(now.getMinutes(), 2) + ":" +
+      pad(now.getSeconds(), 2) + "." +
+      pad(now.getMilliseconds(), 3);
 
-    #ms {
-      height: 1px;
-      width: 48%;
-      background: #00ff9d;
-      opacity: 0.8;
-    }
+    document.getElementById("digital").textContent = t;
 
-    .center-dot {
-      width: 14px;
-      height: 14px;
-      background: #c9d1d9;
-      border-radius: 50%;
-      position: absolute;
-      top: calc(50% - 7px);
-      left: calc(50% - 7px);
-    }
-  </style>
-</head>
-<body>
-  <div id="digital">Loading...</div>
-  <div id="calendar">Loading date...</div>
+    const dayName = getDayMTWTFSS(now);
+    const monthName = months[now.getMonth()];
+    const dayOfYear = getDayOfYear(now);
+    const weekNum = getISOWeek(now);
+    const quarter = getQuarter(now);
 
-  <div class="clock">
-    <!-- Numbers -->
-    <div class="number" style="top: 20px; left: 140px;">12</div>
-    <div class="number" style="top: 55px; left: 220px;">1</div>
-    <div class="number" style="top: 110px; left: 260px;">2</div>
-    <div class="number" style="top: 170px; left: 270px;">3</div>
-    <div class="number" style="top: 230px; left: 260px;">4</div>
-    <div class="number" style="top: 275px; left: 220px;">5</div>
-    <div class="number" style="top: 300px; left: 140px;">6</div>
-    <div class="number" style="top: 275px; left: 60px;">7</div>
-    <div class="number" style="top: 230px; left: 20px;">8</div>
-    <div class="number" style="top: 170px; left: 10px;">9</div>
-    <div class="number" style="top: 110px; left: 20px;">10</div>
-    <div class="number" style="top: 55px; left: 60px;">11</div>
+    const calendarText =
+      `${dayName}, ${monthName} ${now.getDate()}, ${now.getFullYear()}  
+       Day ${dayOfYear} • Week ${weekNum} • Q${quarter}`;
 
-    <!-- Hands -->
-    <div id="hour" class="hand"></div>
-    <div id="minute" class="hand"></div>
-    <div id="second" class="hand"></div>
-    <div id="ms" class="hand"></div>
+    document.getElementById("calendar").textContent = calendarText;
+  }
 
-    <div class="center-dot"></div>
-  </div>
+  function updateAnalog(now) {
+    const ms = now.getMilliseconds();
+    const sec = now.getSeconds() + ms / 1000;
+    const min = now.getMinutes() + sec / 60;
+    const hr  = (now.getHours() % 12) + min / 60;
 
-  <script>
-    function pad(n, s) {
-      return String(n).padStart(s, "0");
-    }
+    document.getElementById("hour").style.transform = `rotate(${hr * 30}deg)`;
+    document.getElementById("minute").style.transform = `rotate(${min * 6}deg)`;
+    document.getElementById("second").style.transform = `rotate(${sec * 6}deg)`;
+    document.getElementById("ms").style.transform = `rotate(${ms * 0.36}deg)`;
+  }
 
-    function updateDigitalAndCalendar() {
-      const d = new Date();
-      const t =
-        d.getFullYear() + "/" +
-        pad(d.getMonth() + 1, 2) + "/" +
-        pad(d.getDate(), 2) + " " +
-        pad(d.getHours(), 2) + ":" +
-        pad(d.getMinutes(), 2) + ":" +
-        pad(d.getSeconds(), 2) + "." +
-        pad(d.getMilliseconds(), 3);
+  function tick() {
+    const now = new Date();
+    updateDigitalAndCalendar(now);
+    updateAnalog(now);
+    requestAnimationFrame(tick);
+  }
 
-      document.getElementById("digital").textContent = t;
-
-      const days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday];
-      const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-
-      const calendarText =
-        days[d.getDay()] + ", " +
-        months[d.getMonth()] + " " +
-        d.getDate() + ", " +
-        d.getFullYear();
-
-      document.getElementById("calendar").textContent = calendarText;
-    }
-
-    function updateAnalog() {
-      const now = new Date();
-
-      const msDeg = now.getMilliseconds() * 0.36; // 1000 ms = 360°
-      const secDeg = now.getSeconds() * 6 + msDeg / 60;
-      const minDeg = now.getMinutes() * 6 + secDeg / 60;
-      const hrDeg  = (now.getHours() % 12) * 30 + minDeg / 12;
-
-      document.getElementById("hour").style.transform = `rotate(${hrDeg}deg)`;
-      document.getElementById("minute").style.transform = `rotate(${minDeg}deg)`;
-      document.getElementById("second").style.transform = `rotate(${secDeg}deg)`;
-      document.getElementById("ms").style.transform = `rotate(${msDeg}deg)`;
-    }
-
-    setInterval(() => {
-      updateDigitalAndCalendar();
-      updateAnalog();
-    }, 10);
-
-    updateDigitalAndCalendar();
-    updateAnalog();
-  </script>
-</body>
-</html>
+  tick();
+</script>

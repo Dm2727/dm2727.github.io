@@ -1,65 +1,128 @@
-CLOCKEEY
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Clock</title>
+
+<title>CLOCKEEY</title>
+
 <style>
   body {
-    font-family: monospace;
+    font-family: Arial Rounded MT, sans-serif;
     background: #0d1117;
     color: #c9d1d9;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    font-size: 24px;
+    gap: 30px;
+  }
+
+  #digital {
+    font-size: 28px;
+    letter-spacing: 1px;
+  }
+
+  .clock {
+    width: 260px;
+    height: 260px;
+    border: 6px solid #30363d;
+    border-radius: 50%;
+    position: relative;
+    background: #111820;
+    box-shadow: 0 0 12px #000;
+  }
+
+  .hand {
+    position: absolute;
+    width: 50%;
+    height: 2px;
+    background: #c9d1d9;
+    top: 50%;
+    transform-origin: 100%;
+    transform: rotate(90deg);
+  }
+
+  #hour {
+    height: 4px;
+    width: 35%;
+    background: #58a6ff;
+  }
+
+  #minute {
+    height: 3px;
+    width: 45%;
+    background: #8b949e;
+  }
+
+  #second {
+    height: 2px;
+    width: 48%;
+    background: #ff7b72;
+  }
+
+  #ms {
+    height: 1px;
+    width: 50%;
+    background: #00ff9d;
+    opacity: 0.7;
+  }
+
+  .center-dot {
+    width: 12px;
+    height: 12px;
+    background: #c9d1d9;
+    border-radius: 50%;
+    position: absolute;
+    top: calc(50% - 6px);
+    left: calc(50% - 6px);
   }
 </style>
-</head>
-<body>
-<div id="clock"></div>
 
-<script>
-function pad(n, s) { return String(n).padStart(s, "0"); }
+<div id="digital">Loading...</div>
 
-function tick() {
-  const d = new Date();
-  const t =
-    d.getFullYear() + "/" +
-    pad(d.getMonth() + 1, 2) + "/" +
-    pad(d.getDate(), 2) + " " +
-    pad(d.getHours(), 2) + ":" +
-    pad(d.getMinutes(), 2) + ":" +
-    pad(d.getSeconds(), 2) + "." +
-    pad(d.getMilliseconds(), 3);
-
-  document.getElementById("clock").textContent = t;
-}
-
-setInterval(tick, 10);
-tick();
-</script>
-</body>
-</html> 
-
-<div style="width:200px;height:200px;border:8px solid #30363d;border-radius:50%;position:relative;margin:20px auto;background:#0d1117;">
-  <div id="hour" style="position:absolute;width:6px;height:50px;background:#c9d1d9;top:50px;left:97px;transform-origin:bottom;"></div>
-  <div id="minute" style="position:absolute;width:4px;height:70px;background:#58a6ff;top:30px;left:98px;transform-origin:bottom;"></div>
-  <div id="second" style="position:absolute;width:2px;height:80px;background:#ff7b72;top:20px;left:99px;transform-origin:bottom;"></div>
+<div class="clock">
+  <div id="hour" class="hand"></div>
+  <div id="minute" class="hand"></div>
+  <div id="second" class="hand"></div>
+  <div id="ms" class="hand"></div>
+  <div class="center-dot"></div>
 </div>
 
 <script>
-function rotate() {
-  const now = new Date();
-  const sec = now.getSeconds() * 6;
-  const min = now.getMinutes() * 6 + sec / 60;
-  const hr  = ((now.getHours() % 12) * 30) + min / 12;
+  function pad(n, s) {
+    return String(n).padStart(s, "0");
+  }
 
-  document.getElementById("hour").style.transform = "rotate(" + hr + "deg)";
-  document.getElementById("minute").style.transform = "rotate(" + min + "deg)";
-  document.getElementById("second").style.transform = "rotate(" + sec + "deg)";
-}
-setInterval(rotate, 1000);
-rotate();
+  function updateDigital() {
+    const d = new Date();
+    const t =
+      d.getFullYear() + "/" +
+      pad(d.getMonth() + 1, 2) + "/" +
+      pad(d.getDate(), 2) + " " +
+      pad(d.getHours(), 2) + ":" +
+      pad(d.getMinutes(), 2) + ":" +
+      pad(d.getSeconds(), 2) + "." +
+      pad(d.getMilliseconds(), 3);
+
+    document.getElementById("digital").textContent = t;
+  }
+
+  function updateAnalog() {
+    const now = new Date();
+
+    const msDeg = now.getMilliseconds() * 0.36; // 1000ms = 360°
+    const secDeg = now.getSeconds() * 6 + msDeg / 60;
+    const minDeg = now.getMinutes() * 6 + secDeg / 60;
+    const hrDeg  = (now.getHours() % 12) * 30 + minDeg / 12;
+
+    document.getElementById("hour").style.transform = `rotate(${hrDeg}deg)`;
+    document.getElementById("minute").style.transform = `rotate(${minDeg}deg)`;
+    document.getElementById("second").style.transform = `rotate(${secDeg}deg)`;
+    document.getElementById("ms").style.transform = `rotate(${msDeg}deg)`;
+  }
+
+  setInterval(() => {
+    updateDigital();
+    updateAnalog();
+  }, 10);
+
+  updateDigital();
+  updateAnalog();
 </script>

@@ -100,7 +100,17 @@
                 margin-bottom:20px;
                 font-weight:600;
             ">
+            
+            <div style="
+                font-size:42px;
+                color:white;
+                margin-bottom:15px;
+                font-weight:700;
+            ">
                 r/PhilippineSirens Map
+            </div>
+            
+                has more loactions than HX56 because of open community contributions
             </div>
 
             <div style="

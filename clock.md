@@ -1,9 +1,8 @@
-
 <title>CLOCKEEY</title>
 
 <style>
   body {
-    font-family: Arial Rounded MT, sans-serif;
+    font-family: Arial, sans-serif;
     background: #0d1117;
     color: #c9d1d9;
     display: flex;
@@ -20,8 +19,8 @@
   }
 
   .clock {
-    width: 260px;
-    height: 260px;
+    width: 300px;
+    height: 300px;
     border: 6px solid #30363d;
     border-radius: 50%;
     position: relative;
@@ -29,6 +28,16 @@
     box-shadow: 0 0 12px #000;
   }
 
+  /* Numbers */
+  .number {
+    position: absolute;
+    font-size: 22px;
+    font-weight: bold;
+    color: #c9d1d9;
+    transform: translate(-50%, -50%);
+  }
+
+  /* Hands */
   .hand {
     position: absolute;
     width: 50%;
@@ -36,52 +45,67 @@
     background: #c9d1d9;
     top: 50%;
     transform-origin: 100%;
-    transform: rotate(90deg);
   }
 
   #hour {
     height: 4px;
-    width: 35%;
+    width: 30%;
     background: #58a6ff;
   }
 
   #minute {
     height: 3px;
-    width: 45%;
+    width: 40%;
     background: #8b949e;
   }
 
   #second {
     height: 2px;
-    width: 48%;
+    width: 45%;
     background: #ff7b72;
   }
 
   #ms {
     height: 1px;
-    width: 50%;
+    width: 48%;
     background: #00ff9d;
     opacity: 0.7;
   }
 
   .center-dot {
-    width: 12px;
-    height: 12px;
+    width: 14px;
+    height: 14px;
     background: #c9d1d9;
     border-radius: 50%;
     position: absolute;
-    top: calc(50% - 6px);
-    left: calc(50% - 6px);
+    top: calc(50% - 7px);
+    left: calc(50% - 7px);
   }
 </style>
 
 <div id="digital">Loading...</div>
 
 <div class="clock">
+  <!-- Numbers -->
+  <div class="number" style="top: 20px; left: 150px;">12</div>
+  <div class="number" style="top: 75px; left: 260px;">1</div>
+  <div class="number" style="top: 150px; left: 280px;">2</div>
+  <div class="number" style="top: 225px; left: 260px;">3</div>
+  <div class="number" style="top: 275px; left: 150px;">6</div>
+  <div class="number" style="top: 225px; left: 40px;">9</div>
+  <div class="number" style="top: 150px; left: 20px;">10</div>
+  <div class="number" style="top: 75px; left: 40px;">11</div>
+  <div class="number" style="top: 275px; left: 260px;">4</div>
+  <div class="number" style="top: 275px; left: 40px;">8</div>
+  <div class="number" style="top: 225px; left: 280px;">5</div>
+  <div class="number" style="top: 150px; left: 280px;">2</div>
+
+  <!-- Hands -->
   <div id="hour" class="hand"></div>
   <div id="minute" class="hand"></div>
   <div id="second" class="hand"></div>
   <div id="ms" class="hand"></div>
+
   <div class="center-dot"></div>
 </div>
 
@@ -107,7 +131,7 @@
   function updateAnalog() {
     const now = new Date();
 
-    const msDeg = now.getMilliseconds() * 0.36; // 1000ms = 360°
+    const msDeg = now.getMilliseconds() * 0.36;
     const secDeg = now.getSeconds() * 6 + msDeg / 60;
     const minDeg = now.getMinutes() * 6 + secDeg / 60;
     const hrDeg  = (now.getHours() % 12) * 30 + minDeg / 12;

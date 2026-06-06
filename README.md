@@ -101,6 +101,6 @@
     font-size: 16px;
     color: #8b949e;
   ">
-    Guides • Documentation • Information
+    2026 • wiki • stuffs about dm2727
   </div>
 </div>

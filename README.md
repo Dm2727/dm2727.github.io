@@ -1,4 +1,4 @@
-```html
+<!-- ANNOUNCEMENT BAR -->
 <div style="
   width: 100%;
   background: #d40000;
@@ -17,7 +17,7 @@
     WhatsApp: https://chat.whatsapp.com/D1rlBXvwJVAJnZNFcu1fjX •
     Discord: https://discord.gg/PUXdwWe4U •
     Reddit: https://reddit.com/r/Dm2727 •
-    NEW REAL TIME CLOCK
+    NEW REAL‑TIME CLOCK
   </marquee>
 </div>
 
@@ -84,7 +84,7 @@
     color: #3fb950;
     text-shadow: 0 0 6px #3fb950;
   ">
-    2727pedia availlable
+    2727pedia Available
   </div>
 
   <a href="https://2727pedia.github.io" style="
@@ -93,7 +93,7 @@
     font-size: 20px;
     font-weight: bold;
   ">
-    wiki.github.io
+    2727pedia.github.io
   </a>
 
   <div style="
@@ -104,4 +104,3 @@
     Guides • Documentation • Information
   </div>
 </div>
-```

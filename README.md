@@ -84,7 +84,7 @@
     color: #3fb950;
     text-shadow: 0 0 6px #3fb950;
   ">
-    2727pedia Available
+    2727pedia now available
   </div>
 
   <a href="https://2727pedia.github.io" style="

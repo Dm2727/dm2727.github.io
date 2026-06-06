@@ -1,5 +1,5 @@
-
-  <div style="
+```html
+<div style="
   width: 100%;
   background: #d40000;
   color: #ffffff;
@@ -13,9 +13,15 @@
   font-family: 'Arial Rounded MT Bold', 'Arial Rounded MT', 'Trebuchet MS', Arial, sans-serif;
 ">
   <marquee scrollamount="9" style="padding-left: 10px;">
-    Dm2727+ is available now • WhatsApp: https://chat.whatsapp.com/D1rlBXvwJVAJnZNFcu1fjX • Discord: https://discord.gg/PUXdwWe4U • Reddit: https://reddit.com/r/Dm2727 • NEW REAL TIME CLOCK    
+    Dm2727+ is available now •
+    WhatsApp: https://chat.whatsapp.com/D1rlBXvwJVAJnZNFcu1fjX •
+    Discord: https://discord.gg/PUXdwWe4U •
+    Reddit: https://reddit.com/r/Dm2727 •
+    NEW REAL TIME CLOCK
   </marquee>
 </div>
+
+<!-- CLOCKEEY BOX -->
 <div style="
   width: 100%;
   padding: 20px;
@@ -53,6 +59,49 @@
     font-size: 16px;
     color: #8b949e;
   ">
-    ONLINE: how many? 
+    ONLINE: how many?
   </div>
-</div> 
+</div>
+
+<!-- WIKI BOX -->
+<div style="
+  width: 100%;
+  padding: 20px;
+  border: 2px solid #2d5f2d;
+  border-radius: 10px;
+  background: #0d1117;
+  color: #c9d1d9;
+  font-family: 'Arial Rounded MT Bold', 'Arial Rounded MT', 'Trebuchet MS', Arial, sans-serif;
+  text-align: center;
+  font-size: 24px;
+  box-shadow: 0 0 12px #3fb950;
+  margin-top: 20px;
+">
+  <div style="
+    font-size: 34px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #3fb950;
+    text-shadow: 0 0 6px #3fb950;
+  ">
+    2727pedia availlable
+  </div>
+
+  <a href="https://2727pedia.github.io" style="
+    color: #3fb950;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+  ">
+    wiki.github.io
+  </a>
+
+  <div style="
+    margin-top: 10px;
+    font-size: 16px;
+    color: #8b949e;
+  ">
+    Guides • Documentation • Information
+  </div>
+</div>
+```

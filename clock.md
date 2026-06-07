@@ -38,7 +38,7 @@ body{margin:0;padding:20px;background:#0f2e18;color:#e6ffe6}
   background:#102418;
 }
 
-/* BIG NUMBERS */
+/* BIG HOUR NUMBERS */
 .number{
   position:absolute;
   width:70px;
@@ -51,12 +51,46 @@ body{margin:0;padding:20px;background:#0f2e18;color:#e6ffe6}
   font-weight:bold;
 }
 
-/* BIG HANDS */
+/* MINI NUMBERS 1–60 */
+.miniNumber{
+  position:absolute;
+  width:22px;
+  height:22px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transform:translate(-50%,-50%);
+  font-size:14px;
+  color:#88ff88;
+  opacity:0.85;
+}
+
+/* TICK MARKS */
+.tick{
+  position:absolute;
+  width:4px;
+  height:18px;
+  background:#66ff66;
+  top:50%;
+  left:50%;
+  transform-origin:50% 120px;
+  opacity:0.7;
+}
+
+/* BOLD 5-MINUTE TICKS */
+.tick.bold{
+  height:28px;
+  width:6px;
+  background:#b7ffb7;
+  opacity:1;
+}
+
+/* CLOCK HANDS */
 .hand{
   position:absolute;
   top:50%;
   left:50%;
-  transform-origin:0% 50%;
+  transform-origin:50% 50%;
 }
 
 #hour{width:35%;height:14px;background:#8cff8c}
@@ -64,7 +98,7 @@ body{margin:0;padding:20px;background:#0f2e18;color:#e6ffe6}
 #second{width:55%;height:5px;background:#fff}
 #ms{width:58%;height:3px;background:#00ff66}
 
-/* BIG CENTER DOT */
+/* CENTER DOT */
 .center-dot{
   width:32px;
   height:32px;
@@ -74,6 +108,98 @@ body{margin:0;padding:20px;background:#0f2e18;color:#e6ffe6}
   top:384px;
   left:384px;
 }
+</style>
+</head>
+<body>
+
+<div class="topRow">
+<div>
+<h1>CLOCKEEY</h1>
+<div id="digital"></div>
+<div id="calendarText"></div>
+</div>
+
+<div class="clock">
+  <div id="nums"></div>
+  <div id="miniNums"></div>
+  <div id="ticks"></div>
+
+  <div id="hour" class="hand"></div>
+  <div id="minute" class="hand"></div>
+  <div id="second" class="hand"></div>
+  <div id="ms" class="hand"></div>
+
+  <div class="center-dot"></div>
+</div>
+</div>
+
+<script>
+/* BIG HOUR NUMBERS 1–12 */
+for(let n=1;n<=12;n++){
+  let d=document.createElement('div');
+  d.className='number';
+  d.textContent=n;
+
+  let a=(n*30 - 90) * Math.PI/180;
+  d.style.left = (400 + 330*Math.cos(a)) + 'px';
+  d.style.top  = (400 + 330*Math.sin(a)) + 'px';
+
+  nums.appendChild(d);
+}
+
+/* MINI NUMBERS 1–60 */
+for(let n=1;n<=60;n++){
+  let d=document.createElement('div');
+  d.className='miniNumber';
+  d.textContent=n;
+
+  let a=(n*6 - 90) * Math.PI/180;
+  d.style.left = (400 + 300*Math.cos(a)) + 'px';
+  d.style.top  = (400 + 300*Math.sin(a)) + 'px';
+
+  miniNums.appendChild(d);
+}
+
+/* TICK MARKS */
+for(let n=1;n<=60;n++){
+  let t=document.createElement('div');
+  t.className='tick';
+
+  if(n % 5 === 0) t.classList.add('bold');
+
+  t.style.transform = `rotate(${n*6}deg)`;
+  ticks.appendChild(t);
+}
+
+/* CLOCK UPDATE */
+function pad(n,s){return String(n).padStart(s,'0');}
+
+function tick(){
+  let now=new Date();
+
+  digital.textContent=
+    `${now.getFullYear()}/${pad(now.getMonth()+1,2)}/${pad(now.getDate(),2)} `
+   +`${pad(now.getHours(),2)}:${pad(now.getMinutes(),2)}:${pad(now.getSeconds(),2)}:${pad(now.getMilliseconds(),3)}`;
+
+  calendarText.textContent=now.toDateString();
+
+  let ms=now.getMilliseconds();
+  let sec=now.getSeconds()+ms/1000;
+  let min=now.getMinutes()+sec/60;
+  let hr=(now.getHours()%12)+min/60;
+
+  hour.style.transform=`rotate(${hr*30 - 90}deg)`;
+  minute.style.transform=`rotate(${min*6 - 90}deg)`;
+  second.style.transform=`rotate(${sec*6 - 90}deg)`;
+  msElem=document.getElementById('ms');
+  msElem.style.transform=`rotate(${ms*0.36 - 90}deg)`;
+
+  requestAnimationFrame(tick);
+}
+tick();
+</script>
+
+
 
 /* Calendar */
 #yearCalendar{

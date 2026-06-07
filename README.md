@@ -63,44 +63,27 @@
   </div>
 </div>
 
-<!-- WIKI BOX -->
 <div style="
   width: 100%;
   padding: 20px;
-  border: 2px solid #2d5f2d;
+  border: 2px solid #30363d;
   border-radius: 10px;
   background: #0d1117;
   color: #c9d1d9;
   font-family: 'Arial Rounded MT Bold', 'Arial Rounded MT', 'Trebuchet MS', Arial, sans-serif;
   text-align: center;
   font-size: 24px;
-  box-shadow: 0 0 12px #3fb950;
+  box-shadow: 0 0 12px #1f6feb;
   margin-top: 20px;
 ">
   <div style="
     font-size: 34px;
     font-weight: bold;
     margin-bottom: 10px;
-    color: #3fb950;
-    text-shadow: 0 0 6px #3fb950;
+    color: #246a59;
+    text-shadow: 0 0 6px #1f6feb;
   ">
-    2727pedia now available
-  </div>
+    Dm2727 is a siren enthusiast from Hanworth that has an MS‑190 and an MS‑290. He not only records sirens, he designs them, studies them, and is always thinking about which one he might add to his collection next. He CAN BUY!
 
-  <a href="https://2727pedia.github.io" style="
-    color: #3fb950;
-    text-decoration: none;
-    font-size: 20px;
-    font-weight: bold;
-  ">
-    2727pedia.github.io
-  </a>
-
-  <div style="
-    margin-top: 10px;
-    font-size: 16px;
-    color: #8b949e;
-  ">
-    2026 • wiki • stuffs about dm2727
+When he’s not working with sirens, he’s on the track. In Mario Kart World he mains Para‑Biddybud, in Mario Kart 8 Deluxe he races with his favourite character Yoshi, and in Mario Kart Wii he tears up the course as Funky Kong. And yes — he absolutely loves Yoshi.
   </div>
-</div>

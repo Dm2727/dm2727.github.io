@@ -8,18 +8,82 @@
 *{box-sizing:border-box}
 body,button,textarea{font-family:"Arial Rounded MT Bold","Arial Rounded MT",Arial,sans-serif}
 body{margin:0;padding:20px;background:#0f2e18;color:#e6ffe6}
-.topRow{display:flex;gap:40px;align-items:center;justify-content:center;flex-wrap:wrap}
-#digital{font-size:42px;font-weight:bold;color:#b7ffb7}
-#calendarText{font-size:24px}
-.clock{width:500px;height:500px;border:10px solid #1f3a2a;border-radius:50%;position:relative;background:#102418}
-.number{position:absolute;width:50px;height:50px;display:flex;align-items:center;justify-content:center;transform:translate(-50%,-50%);font-size:32px;font-weight:bold}
-.hand{position:absolute;top:50%;left:50%;transform-origin:0% 50%}
-#hour{width:30%;height:8px;background:#8cff8c}
-#minute{width:40%;height:6px;background:#d6ffd6}
-#second{width:45%;height:3px;background:#fff}
-#ms{width:48%;height:2px;background:#00ff66}
-.center-dot{width:24px;height:24px;border-radius:50%;background:white;position:absolute;top:238px;left:238px}
-#yearCalendar{margin-top:20px;height:900px;overflow:auto;background:#163520;padding:15px;border-radius:10px}
+
+.topRow{
+  display:flex;
+  gap:40px;
+  align-items:center;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+/* BIG DIGITAL CLOCK */
+#digital{
+  font-size:110px;
+  font-weight:bold;
+  color:#b7ffb7;
+  letter-spacing:3px;
+  text-align:center;
+}
+
+#calendarText{font-size:28px}
+
+/* BIG CLOCK FACE */
+.clock{
+  width:800px;
+  height:800px;
+  border:14px solid #1f3a2a;
+  border-radius:50%;
+  position:relative;
+  background:#102418;
+}
+
+/* BIG NUMBERS */
+.number{
+  position:absolute;
+  width:70px;
+  height:70px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transform:translate(-50%,-50%);
+  font-size:48px;
+  font-weight:bold;
+}
+
+/* BIG HANDS */
+.hand{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform-origin:0% 50%;
+}
+
+#hour{width:35%;height:14px;background:#8cff8c}
+#minute{width:48%;height:10px;background:#d6ffd6}
+#second{width:55%;height:5px;background:#fff}
+#ms{width:58%;height:3px;background:#00ff66}
+
+/* BIG CENTER DOT */
+.center-dot{
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  background:white;
+  position:absolute;
+  top:384px;
+  left:384px;
+}
+
+/* Calendar */
+#yearCalendar{
+  margin-top:20px;
+  height:900px;
+  overflow:auto;
+  background:#163520;
+  padding:15px;
+  border-radius:10px;
+}
 .year{margin-bottom:20px}
 .months{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
 .month{background:#102418;padding:8px;border-radius:8px}
@@ -30,16 +94,27 @@ body{margin:0;padding:20px;background:#0f2e18;color:#e6ffe6}
 .day{border:1px solid #2e6b42;cursor:pointer}
 .hasNote{background:#006b3a}
 textarea{width:100%;height:120px}
-#notePanel{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#102418;padding:15px;border:1px solid #2e6b42}
+#notePanel{
+  display:none;
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  background:#102418;
+  padding:15px;
+  border:1px solid #2e6b42;
+}
 </style>
 </head>
 <body>
+
 <div class="topRow">
 <div>
 <h1>CLOCKEEY</h1>
 <div id="digital"></div>
 <div id="calendarText"></div>
 </div>
+
 <div class="clock">
 <div id="nums"></div>
 <div id="hour" class="hand"></div>
@@ -49,6 +124,7 @@ textarea{width:100%;height:120px}
 <div class="center-dot"></div>
 </div>
 </div>
+
 <div id="yearCalendar"></div>
 
 <div id="notePanel">
@@ -62,12 +138,13 @@ textarea{width:100%;height:120px}
 const months=["January","February","March","April","May","June","July","August","September","October","November","December"];
 const days=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
 
+/* BIG NUMBER POSITIONS */
 for(let n=1;n<=12;n++){
  let d=document.createElement('div');
  d.className='number'; d.textContent=n;
  let a=(n*30-90)*Math.PI/180;
- d.style.left=(250+210*Math.cos(a))+'px';
- d.style.top=(250+210*Math.sin(a))+'px';
+ d.style.left=(400 + 330*Math.cos(a))+'px';
+ d.style.top =(400 + 330*Math.sin(a))+'px';
  nums.appendChild(d);
 }
 
@@ -75,7 +152,10 @@ function pad(n,s){return String(n).padStart(s,'0');}
 
 function tick(){
  let now=new Date();
- digital.textContent=`${now.getFullYear()}/${pad(now.getMonth()+1,2)}/${pad(now.getDate(),2)} ${pad(now.getHours(),2)}:${pad(now.getMinutes(),2)}:${pad(now.getSeconds(),2)}:${pad(now.getMilliseconds(),3)}`;
+ digital.textContent=
+   `${now.getFullYear()}/${pad(now.getMonth()+1,2)}/${pad(now.getDate(),2)} `
+  +`${pad(now.getHours(),2)}:${pad(now.getMinutes(),2)}:${pad(now.getSeconds(),2)}:${pad(now.getMilliseconds(),3)}`;
+
  calendarText.textContent=now.toDateString();
 
  let ms=now.getMilliseconds();
@@ -83,10 +163,12 @@ function tick(){
  let min=now.getMinutes()+sec/60;
  let hr=(now.getHours()%12)+min/60;
 
- hour.style.transform=`rotate(${hr*30}deg)`;
- minute.style.transform=`rotate(${min*6}deg)`;
- second.style.transform=`rotate(${sec*6}deg)`;
- document.getElementById('ms').style.transform=`rotate(${ms*0.36}deg)`;
+ /* FIXED ROTATION */
+ hour.style.transform=`rotate(${hr*30 - 90}deg)`;
+ minute.style.transform=`rotate(${min*6 - 90}deg)`;
+ second.style.transform=`rotate(${sec*6 - 90}deg)`;
+ msElem=document.getElementById('ms');
+ msElem.style.transform=`rotate(${ms*0.36 - 90}deg)`;
 
  requestAnimationFrame(tick);
 }
@@ -137,18 +219,22 @@ function buildCentury(){
    c.appendChild(yd);
  }
 }
+
 function openNote(y,m,d){
  noteDate.textContent=key(y,m,d);
  noteText.value=localStorage.getItem('note-'+key(y,m,d))||'';
  notePanel.style.display='block';
 }
+
 function saveNote(){
  let k=noteDate.textContent;
  if(noteText.value.trim()) localStorage.setItem('note-'+k,noteText.value);
  else localStorage.removeItem('note-'+k);
  notePanel.style.display='none';
 }
+
 function closeNote(){notePanel.style.display='none';}
+
 buildCentury();
 </script>
 </body>

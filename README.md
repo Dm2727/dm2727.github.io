@@ -70,7 +70,7 @@
   border: 2px solid #30363d;
   border-radius: 10px;
   background: #08285f;
-  color: #36e671;
+  color: #000f06;
   font-family: 'Arial Rounded MT Bold', 'Arial Rounded MT', 'Trebuchet MS', Arial, sans-serif;
   text-align: center;
   font-size: 12px;

@@ -57,11 +57,12 @@
   <div style="
     margin-top: 10px;
     font-size: 16px;
-    color: #8b949e;
+    color: #b49ee7;
   ">
     ONLINE: how many?
   </div>
 </div>
+
 
 <div style="
   width: 100%;
@@ -72,12 +73,12 @@
   color: #c9d1d9;
   font-family: 'Arial Rounded MT Bold', 'Arial Rounded MT', 'Trebuchet MS', Arial, sans-serif;
   text-align: center;
-  font-size: 24px;
+  font-size: 12px;
   box-shadow: 0 0 12px #1f6feb;
   margin-top: 20px;
 ">
   <div style="
-    font-size: 34px;
+    font-size: 17px;
     font-weight: bold;
     margin-bottom: 10px;
     color: #246a59;

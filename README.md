@@ -84,7 +84,21 @@
     color: #246a59;
     text-shadow: 0 0 6px #1f6feb;
   ">
-    Dm2727 is a siren enthusiast from Hanworth that has an MS‑190 and an MS‑290. He not only records sirens, he designs them, studies them, and is always thinking about which one he might add to his collection next. He CAN BUY!
+I’m Dm2727, a siren enthusiast from Hanworth. I also play Mario Kart.
+    
+**WHAT I MAIN**
 
-When he’s not working with sirens, he’s on the track. In Mario Kart World he mains Para‑Biddybud, in Mario Kart 8 Deluxe he races with his favourite character Yoshi, and in Mario Kart Wii he tears up the course as Funky Kong. And yes — he absolutely loves Yoshi.
+Mario Kart Wii: Funky Kong
+
+Mario Kart 8 Deluxe: Yoshi / Toadette
+
+Mario Kart World: Para‑Biddybud / Toadette
+
+**WHAT SIRENS I HAVE**
+
+MS‑190 (DC 24V)
+
+MS‑290 (AC 220V)
+
+More coming soon…
   </div>

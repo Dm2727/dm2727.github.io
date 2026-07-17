@@ -96,9 +96,9 @@ Mario Kart World: Para‑Biddybud / Toadette
 
 **WHAT SIRENS I HAVE**
 
-MS‑190 (DC 24V)
+MS‑190 (24VDC)
 
-MS‑290 (AC 220V)
+MS‑290 (220VAC)
 
 More coming soon…
   </div>

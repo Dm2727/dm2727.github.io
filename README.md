@@ -1,4 +1,13 @@
-<!-- ANNOUNCEMENT BAR -->
+<!-- ANNOUNCEMENT <meta http-equiv="refresh" content="0; url=https://dm2727.netlify.app">
+
+WE HAVE MOVED TO NETLIFY DM2727.NETLIFY.APP
+
+
+
+
+
+
+
 <div style="
   width: 100%;
   background: #d40000;

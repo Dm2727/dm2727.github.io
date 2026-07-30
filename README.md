@@ -1,10 +1,3 @@
-<!-- ANNOUNCEMENT <meta http-equiv="refresh" content="0; url=https://dm2727.netlify.app">
-
-WE HAVE MOVED TO NETLIFY DM2727.NETLIFY.APP
-
-
-
-
 
 
 
@@ -19,7 +12,7 @@ WE HAVE MOVED TO NETLIFY DM2727.NETLIFY.APP
   border: 2px solid #7a0000;
   overflow: hidden;
   box-shadow: 0 0 12px #ff1a1a;
-  font-family: 'Arial Rounded MT Bold', 'Arial Rounded MT', 'Trebuchet MS', Arial, sans-serif;
+  font-family: 'Lato Bold', 'Lato', 'Trebuchet MS', Arial, sans-serif;
 ">
   <marquee scrollamount="9" style="padding-left: 10px;">
     Dm2727+ is available now •
@@ -38,7 +31,7 @@ WE HAVE MOVED TO NETLIFY DM2727.NETLIFY.APP
   border-radius: 10px;
   background: #0d1117;
   color: #c9d1d9;
-  font-family: 'Arial Rounded MT Bold', 'Arial Rounded MT', 'Trebuchet MS', Arial, sans-serif;
+  font-family: 'Lato Bold', 'Lato', 'Trebuchet MS', Arial, sans-serif;
   text-align: center;
   font-size: 24px;
   box-shadow: 0 0 12px #1f6feb;
@@ -68,7 +61,7 @@ WE HAVE MOVED TO NETLIFY DM2727.NETLIFY.APP
     font-size: 16px;
     color: #b49ee7;
   ">
-    ONLINE: how many?
+    time is set at local timezone, with completely no ads
   </div>
 </div>
 
@@ -80,7 +73,7 @@ WE HAVE MOVED TO NETLIFY DM2727.NETLIFY.APP
   border-radius: 10px;
   background: #08285f;
   color: #000f06;
-  font-family: 'Arial Rounded MT Bold', 'Arial Rounded MT', 'Trebuchet MS', Arial, sans-serif;
+  font-family: 'Lato Bold', 'Lato', 'Trebuchet MS', Arial, sans-serif;
   text-align: center;
   font-size: 12px;
   box-shadow: 0 0 12px #1f6feb;
@@ -93,21 +86,7 @@ WE HAVE MOVED TO NETLIFY DM2727.NETLIFY.APP
     color: #246a59;
     text-shadow: 0 0 6px #1f6feb;
   ">
-I’m Dm2727, a siren enthusiast from Hanworth. I also play Mario Kart.
-    
-**WHAT I MAIN**
-
-Mario Kart Wii: Funky Kong
-
-Mario Kart 8 Deluxe: Yoshi / Toadette
-
-Mario Kart World: Para‑Biddybud / Toadette
-
-**WHAT SIRENS I HAVE**
-
-MS‑190 (24VDC)
-
-MS‑290 (220VAC)
+youve reached dm2727 (plays mario kart and has sirens)  
 
 More coming soon…
   </div>

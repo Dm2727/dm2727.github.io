@@ -27,6 +27,11 @@
   </style>
 </head>
 <body>
-  <div class="placeholder">you've reached Dm2727. a crazy guy living in hanworth with 2 (and more on the way) sirens and a pro in several mario kart games</div>
+  <div class="placeholder">you've reached Dm2727. a crazy guy living in hanworth with 2 (and more on the way) sirens and a pro in several mario kart games
+  
+  TWclock: dm2727.org.uk/clock
+  SirenOSC (by aphidaks): dm2727.org.uk/sirenosc or aphidaks.com/sirenosc
+  
+  </div>
 </body>
 </html>

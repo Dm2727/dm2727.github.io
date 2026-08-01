@@ -1,367 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CLOCKEEY</title>
-<style>
-*{box-sizing:border-box}
-body,button,textarea{font-family:"Arial Rounded MT Bold","Arial Rounded MT",Arial,sans-serif}
-body{margin:0;padding:20px;background:#0f2e18;color:#e6ffe6}
+  <meta charset="UTF-8" />
+  <title>Real Time Clock</title>
 
-.topRow{
-  display:flex;
-  gap:40px;
-  align-items:center;
-  justify-content:center;
-  flex-wrap:wrap;
-}
+  <!-- Montserrat font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 
-/* BIG DIGITAL CLOCK */
-#digital{
-  font-size:110px;
-  font-weight:bold;
-  color:#b7ffb7;
-  letter-spacing:3px;
-  text-align:center;
-}
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-#calendarText{font-size:28px}
+    body {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0f0c29;
+      color: #ffffff;
+      font-family: "Montserrat", sans-serif;
+    }
 
-/* BIG CLOCK FACE */
-.clock{
-  width:800px;
-  height:800px;
-  border:14px solid #1f3a2a;
-  border-radius:50%;
-  position:relative;
-  background:#102418;
-}
-
-/* BIG HOUR NUMBERS */
-.number{
-  position:absolute;
-  width:70px;
-  height:70px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  transform:translate(-50%,-50%);
-  font-size:48px;
-  font-weight:bold;
-}
-
-/* MINI NUMBERS 1–60 */
-.miniNumber{
-  position:absolute;
-  width:22px;
-  height:22px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  transform:translate(-50%,-50%);
-  font-size:14px;
-  color:#88ff88;
-  opacity:0.85;
-}
-
-/* TICK MARKS */
-.tick{
-  position:absolute;
-  width:4px;
-  height:18px;
-  background:#66ff66;
-  top:50%;
-  left:50%;
-  transform-origin:50% 120px;
-  opacity:0.7;
-}
-
-/* BOLD 5-MINUTE TICKS */
-.tick.bold{
-  height:28px;
-  width:6px;
-  background:#b7ffb7;
-  opacity:1;
-}
-
-/* CLOCK HANDS */
-.hand{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform-origin:50% 50%;
-}
-
-#hour{width:35%;height:14px;background:#8cff8c}
-#minute{width:48%;height:10px;background:#d6ffd6}
-#second{width:55%;height:5px;background:#fff}
-#ms{width:58%;height:3px;background:#00ff66}
-
-/* CENTER DOT */
-.center-dot{
-  width:32px;
-  height:32px;
-  border-radius:50%;
-  background:white;
-  position:absolute;
-  top:384px;
-  left:384px;
-}
-</style>
+    .clock {
+      padding: 30px 40px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      font-size: 2rem;
+      letter-spacing: 0.1em;
+    }
+  </style>
 </head>
 <body>
+  <div class="clock" id="clock">0000/00/00 00:00:00.000</div>
 
-<div class="topRow">
-<div>
-<h1>CLOCKEEY</h1>
-<div id="digital"></div>
-<div id="calendarText"></div>
-</div>
+  <script>
+    function pad(num, size) {
+      return num.toString().padStart(size, "0");
+    }
 
-<div class="clock">
-  <div id="nums"></div>
-  <div id="miniNums"></div>
-  <div id="ticks"></div>
+    function updateClock() {
+      const now = new Date();
 
-  <div id="hour" class="hand"></div>
-  <div id="minute" class="hand"></div>
-  <div id="second" class="hand"></div>
-  <div id="ms" class="hand"></div>
+      const year  = now.getFullYear();
+      const month = pad(now.getMonth() + 1, 2); // 0-based
+      const day   = pad(now.getDate(), 2);
 
-  <div class="center-dot"></div>
-</div>
-</div>
+      const hours   = pad(now.getHours(), 2);
+      const minutes = pad(now.getMinutes(), 2);
+      const seconds = pad(now.getSeconds(), 2);
 
-<script>
-/* BIG HOUR NUMBERS 1–12 */
-for(let n=1;n<=12;n++){
-  let d=document.createElement('div');
-  d.className='number';
-  d.textContent=n;
+      const ms = pad(now.getMilliseconds(), 3); // msmsms (3 digits)
 
-  let a=(n*30 - 90) * Math.PI/180;
-  d.style.left = (400 + 330*Math.cos(a)) + 'px';
-  d.style.top  = (400 + 330*Math.sin(a)) + 'px';
+      const formatted =
+        `${year}/${month}/${day} ${hours}:${minutes}:${seconds}.${ms}`;
 
-  nums.appendChild(d);
-}
+      document.getElementById("clock").textContent = formatted;
+    }
 
-/* MINI NUMBERS 1–60 */
-for(let n=1;n<=60;n++){
-  let d=document.createElement('div');
-  d.className='miniNumber';
-  d.textContent=n;
-
-  let a=(n*6 - 90) * Math.PI/180;
-  d.style.left = (400 + 300*Math.cos(a)) + 'px';
-  d.style.top  = (400 + 300*Math.sin(a)) + 'px';
-
-  miniNums.appendChild(d);
-}
-
-/* TICK MARKS */
-for(let n=1;n<=60;n++){
-  let t=document.createElement('div');
-  t.className='tick';
-
-  if(n % 5 === 0) t.classList.add('bold');
-
-  t.style.transform = `rotate(${n*6}deg)`;
-  ticks.appendChild(t);
-}
-
-/* CLOCK UPDATE */
-function pad(n,s){return String(n).padStart(s,'0');}
-
-function tick(){
-  let now=new Date();
-
-  digital.textContent=
-    `${now.getFullYear()}/${pad(now.getMonth()+1,2)}/${pad(now.getDate(),2)} `
-   +`${pad(now.getHours(),2)}:${pad(now.getMinutes(),2)}:${pad(now.getSeconds(),2)}:${pad(now.getMilliseconds(),3)}`;
-
-  calendarText.textContent=now.toDateString();
-
-  let ms=now.getMilliseconds();
-  let sec=now.getSeconds()+ms/1000;
-  let min=now.getMinutes()+sec/60;
-  let hr=(now.getHours()%12)+min/60;
-
-  hour.style.transform=`rotate(${hr*30 - 90}deg)`;
-  minute.style.transform=`rotate(${min*6 - 90}deg)`;
-  second.style.transform=`rotate(${sec*6 - 90}deg)`;
-  msElem=document.getElementById('ms');
-  msElem.style.transform=`rotate(${ms*0.36 - 90}deg)`;
-
-  requestAnimationFrame(tick);
-}
-tick();
-</script>
-
-
-
-/* Calendar */
-#yearCalendar{
-  margin-top:20px;
-  height:900px;
-  overflow:auto;
-  background:#163520;
-  padding:15px;
-  border-radius:10px;
-}
-.year{margin-bottom:20px}
-.months{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
-.month{background:#102418;padding:8px;border-radius:8px}
-.month h4{margin:0 0 8px;color:#7dff7d}
-.days{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;font-size:12px}
-.day,.hdr{text-align:center;padding:3px}
-.hdr{font-weight:bold}
-.day{border:1px solid #2e6b42;cursor:pointer}
-.hasNote{background:#006b3a}
-textarea{width:100%;height:120px}
-#notePanel{
-  display:none;
-  position:fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  background:#102418;
-  padding:15px;
-  border:1px solid #2e6b42;
-}
-</style>
-</head>
-<body>
-
-<div class="topRow">
-<div>
-<h1>CLOCKEEY</h1>
-<div id="digital"></div>
-<div id="calendarText"></div>
-</div>
-
-<div class="clock">
-<div id="nums"></div>
-<div id="hour" class="hand"></div>
-<div id="minute" class="hand"></div>
-<div id="second" class="hand"></div>
-<div id="ms" class="hand"></div>
-<div class="center-dot"></div>
-</div>
-</div>
-
-<div id="yearCalendar"></div>
-
-<div id="notePanel">
-<h3 id="noteDate"></h3>
-<textarea id="noteText"></textarea><br>
-<button onclick="saveNote()">Save</button>
-<button onclick="closeNote()">Close</button>
-</div>
-
-<script>
-const months=["January","February","March","April","May","June","July","August","September","October","November","December"];
-const days=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
-
-/* BIG NUMBER POSITIONS */
-for(let n=1;n<=12;n++){
- let d=document.createElement('div');
- d.className='number'; d.textContent=n;
- let a=(n*30-90)*Math.PI/180;
- d.style.left=(400 + 330*Math.cos(a))+'px';
- d.style.top =(400 + 330*Math.sin(a))+'px';
- nums.appendChild(d);
-}
-
-function pad(n,s){return String(n).padStart(s,'0');}
-
-function tick(){
- let now=new Date();
- digital.textContent=
-   `${now.getFullYear()}/${pad(now.getMonth()+1,2)}/${pad(now.getDate(),2)} `
-  +`${pad(now.getHours(),2)}:${pad(now.getMinutes(),2)}:${pad(now.getSeconds(),2)}:${pad(now.getMilliseconds(),3)}`;
-
- calendarText.textContent=now.toDateString();
-
- let ms=now.getMilliseconds();
- let sec=now.getSeconds()+ms/1000;
- let min=now.getMinutes()+sec/60;
- let hr=(now.getHours()%12)+min/60;
-
- /* FIXED ROTATION */
- hour.style.transform=`rotate(${hr*30 - 90}deg)`;
- minute.style.transform=`rotate(${min*6 - 90}deg)`;
- second.style.transform=`rotate(${sec*6 - 90}deg)`;
- msElem=document.getElementById('ms');
- msElem.style.transform=`rotate(${ms*0.36 - 90}deg)`;
-
- requestAnimationFrame(tick);
-}
-tick();
-
-function key(y,m,d){return `${y}-${m+1}-${d}`}
-
-function buildCentury(){
- let start=new Date().getFullYear();
- let c=document.getElementById('yearCalendar');
- for(let y=start;y<start+100;y++){
-   let yd=document.createElement('div');
-   yd.className='year';
-   yd.innerHTML=`<h2>${y}</h2>`;
-   let monthsWrap=document.createElement('div');
-   monthsWrap.className='months';
-
-   for(let m=0;m<12;m++){
-     let md=document.createElement('div');
-     md.className='month';
-     md.innerHTML=`<h4>${months[m]}</h4>`;
-     let grid=document.createElement('div');
-     grid.className='days';
-
-     days.forEach(x=>{
-       let h=document.createElement('div');
-       h.className='hdr';
-       h.textContent=x;
-       grid.appendChild(h);
-     });
-
-     let off=(new Date(y,m,1).getDay()+6)%7;
-     for(let i=0;i<off;i++) grid.appendChild(document.createElement('div'));
-
-     let dim=new Date(y,m+1,0).getDate();
-     for(let d=1;d<=dim;d++){
-       let cell=document.createElement('div');
-       cell.className='day';
-       if(localStorage.getItem('note-'+key(y,m,d))) cell.classList.add('hasNote');
-       cell.textContent=d;
-       cell.onclick=()=>openNote(y,m,d);
-       grid.appendChild(cell);
-     }
-     md.appendChild(grid);
-     monthsWrap.appendChild(md);
-   }
-   yd.appendChild(monthsWrap);
-   c.appendChild(yd);
- }
-}
-
-function openNote(y,m,d){
- noteDate.textContent=key(y,m,d);
- noteText.value=localStorage.getItem('note-'+key(y,m,d))||'';
- notePanel.style.display='block';
-}
-
-function saveNote(){
- let k=noteDate.textContent;
- if(noteText.value.trim()) localStorage.setItem('note-'+k,noteText.value);
- else localStorage.removeItem('note-'+k);
- notePanel.style.display='none';
-}
-
-function closeNote(){notePanel.style.display='none';}
-
-buildCentury();
-</script>
+    // Update every 10ms for a smooth millisecond display
+    setInterval(updateClock, 10);
+    updateClock();
+  </script>
 </body>
 </html>

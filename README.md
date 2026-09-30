@@ -86,7 +86,7 @@
 <body>
   <header>
     <h1>Dm2727</h1>
-    <p>dm2727.org.uk – sirens, Mario Kart, and other chaos.</p>
+    <p>if youre in dm2727.github.io do not go. its dm2727.org.uk </p>
   </header>
 
   <div class="ticker-wrapper">

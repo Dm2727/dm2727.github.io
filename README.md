@@ -115,11 +115,5 @@
   </main>
 
   <footer>
-    &copy; <span id="year"></span> Dm2727 – dm2727.org.uk
-  </footer>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
-</body>
-</html>
+   <p>©Dm2727 2026
+   All rights reserved</p>

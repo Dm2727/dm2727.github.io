@@ -3,90 +3,91 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Multi-Tone Generator</title>
+<title>Dm2727's tone generator and keypad 1.1</title>
 
 <style>
-* {
-    box-sizing: border-box;
+body{
+    font-family:"Helvetica World",Helvetica,Arial,sans-serif;
+    background:#fff;
+    color:#000;
+    margin:20px auto;
+    max-width:900px;
+    padding:20px;
 }
 
-body {
-    font-family:
-        "Helvetica World",
-        Helvetica,
-        Arial,
-        sans-serif;
-    background: white;
-    color: black;
-    margin: 20px;
+h1,h2{
+    font-weight:400;
 }
 
-h1 {
-    margin-bottom: 20px;
-    font-weight: normal;
+button,input,select{
+    font-family:inherit;
 }
 
-button,
-input,
-select {
-    font-family: inherit;
+button{
+    background:#fff;
+    color:#000;
+    border:1px solid #000;
+    padding:10px;
+    cursor:pointer;
 }
 
-#addTone {
-    padding: 10px 16px;
-    border: 1px solid black;
-    background: white;
-    cursor: pointer;
+input,select{
+    border:1px solid #000;
+    background:#fff;
+    color:#000;
+    padding:8px;
 }
 
-.tone {
-    border: 1px solid black;
-    padding: 15px;
-    margin-top: 15px;
+.tone{
+    border:1px solid #000;
+    padding:12px;
+    margin-bottom:12px;
 }
 
-.row {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-bottom: 10px;
+.row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
 }
 
-.field {
-    flex: 1;
-    min-width: 180px;
+.row>*{
+    flex:1;
 }
 
-label {
-    display: block;
-    margin-bottom: 4px;
+#display{
+    width:100%;
+    margin-bottom:10px;
+    text-align:center;
+    font-size:24px;
 }
 
-input,
-select {
-    width: 100%;
-    padding: 6px;
-    border: 1px solid black;
-    background: white;
-    color: black;
+.keypad{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+    max-width:340px;
 }
 
-.actions {
-    display: flex;
-    gap: 8px;
-    margin-top: 10px;
+.keypad button{
+    height:70px;
+    font-size:24px;
 }
 
-.actions button {
-    padding: 8px 14px;
-    border: 1px solid black;
-    background: white;
-    cursor: pointer;
+.controls{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin-top:8px;
+    max-width:340px;
 }
 
-.readout {
-    margin-top: 4px;
-    font-size: 13px;
+.call{
+    background:#000;
+    color:#fff;
+}
+
+.status{
+    margin-top:15px;
 }
 </style>
 </head>
@@ -94,218 +95,222 @@ select {
 
 <h1>Multi-Tone Generator</h1>
 
-<button id="addTone">Add Tone</button>
+<button onclick="addTone()">Add Tone</button>
 
 <div id="tones"></div>
 
-<script>
-let audioContext;
-let toneId = 0;
+<hr>
 
-function getAudioContext() {
+<h2>Fake Telephone Dialler</h2>
+
+<input
+id="display"
+readonly
+placeholder="Enter number">
+
+<div class="keypad">
+<button onclick="pressKey('1')">1</button>
+<button onclick="pressKey('2')">2</button>
+<button onclick="pressKey('3')">3</button>
+
+<button onclick="pressKey('4')">4</button>
+<button onclick="pressKey('5')">5</button>
+<button onclick="pressKey('6')">6</button>
+
+<button onclick="pressKey('7')">7</button>
+<button onclick="pressKey('8')">8</button>
+<button onclick="pressKey('9')">9</button>
+
+<button onclick="pressKey('+')">+</button>
+<button onclick="pressKey('0')">0</button>
+<button onclick="pressKey('#')">#</button>
+</div>
+
+<div class="controls">
+<button class="call" onclick="fakeCall()">
+Call
+</button>
+
+<button onclick="hangUp()">
+End
+</button>
+
+<button onclick="backspace()">
+Backspace
+</button>
+
+<button onclick="clearDisplay()">
+Clear
+</button>
+</div>
+
+<div class="status" id="status">
+Ready
+</div>
+
+<script>
+
+let audioContext;
+let activeTones = [];
+let callActive = false;
+
+function getContext() {
     if (!audioContext) {
-        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        audioContext = new (
+            window.AudioContext ||
+            window.webkitAudioContext
+        )();
     }
     return audioContext;
 }
 
+function sleep(ms) {
+    return new Promise(resolve =>
+        setTimeout(resolve, ms)
+    );
+}
+
 function createParabolaCurve(size = 65536) {
+
     const curve = new Float32Array(size);
 
     for (let i = 0; i < size; i++) {
-        const x = (i / (size - 1)) * 2 - 1;
-        curve[i] = 2 * (x * x) - 1;
+
+        const x =
+            (i / (size - 1)) * 2 - 1;
+
+        curve[i] =
+            (2 * x * x) - 1;
     }
 
     return curve;
 }
 
-function createToneCard() {
-    toneId++;
+class Tone {
 
-    const div = document.createElement("div");
-    div.className = "tone";
+    constructor(
+        frequency,
+        waveform,
+        volume
+    ) {
 
-    div.innerHTML = `
-        <div class="row">
+        this.frequency = frequency;
+        this.waveform = waveform;
+        this.volume = volume;
 
-            <div class="field">
-                <label>Frequency (Hz)</label>
-                <input
-                    type="number"
-                    min="0.1"
-                    max="30000"
-                    step="0.1"
-                    value="440"
-                    class="freq">
-                <div class="readout"></div>
-            </div>
-
-            <div class="field">
-                <label>Waveform</label>
-                <select class="waveform">
-                    <option value="sine">Sine</option>
-                    <option value="square">Square</option>
-                    <option value="triangle">Triangle</option>
-                    <option value="sawtooth">Saw</option>
-                    <option value="parabola">Parabola</option>
-                </select>
-            </div>
-
-            <div class="field">
-                <label>Volume (%)</label>
-                <input
-                    type="range"
-                    min="0"
-                    max="100"
-                    value="20"
-                    class="volume">
-            </div>
-
-        </div>
-
-        <div class="actions">
-            <button class="start">Start</button>
-            <button class="stop">Stop</button>
-            <button class="delete">Delete</button>
-        </div>
-    `;
-
-    const freqInput = div.querySelector(".freq");
-    const waveformInput = div.querySelector(".waveform");
-    const volumeInput = div.querySelector(".volume");
-    const readout = div.querySelector(".readout");
-
-    const startBtn = div.querySelector(".start");
-    const stopBtn = div.querySelector(".stop");
-    const deleteBtn = div.querySelector(".delete");
-
-    let oscillator = null;
-    let gainNode = null;
-    let waveShaper = null;
-
-    function updateReadout() {
-        const f = parseFloat(freqInput.value);
-
-        if (f >= 1000) {
-            readout.textContent =
-                (f / 1000).toFixed(3) + " kHz";
-        } else {
-            readout.textContent =
-                f.toFixed(2) + " Hz";
-        }
+        this.osc = null;
+        this.gain = null;
+        this.shaper = null;
     }
 
-    updateReadout();
+    start() {
 
-    freqInput.addEventListener("input", () => {
-        updateReadout();
+        if (this.osc) return;
 
-        if (oscillator) {
-            oscillator.frequency.setValueAtTime(
-                parseFloat(freqInput.value),
-                audioContext.currentTime
+        const ctx = getContext();
+
+        this.osc =
+            ctx.createOscillator();
+
+        this.gain =
+            ctx.createGain();
+
+        this.osc.frequency.value =
+            this.frequency;
+
+        this.gain.gain.value =
+            this.volume;
+
+        if (
+            this.waveform ===
+            "parabola"
+        ) {
+
+            this.osc.type =
+                "triangle";
+
+            this.shaper =
+                ctx.createWaveShaper();
+
+            this.shaper.curve =
+                createParabolaCurve();
+
+            this.osc.connect(
+                this.shaper
             );
-        }
-    });
 
-    volumeInput.addEventListener("input", () => {
-        if (gainNode) {
-            gainNode.gain.setValueAtTime(
-                volumeInput.value / 100,
-                audioContext.currentTime
+            this.shaper.connect(
+                this.gain
             );
-        }
-    });
-
-    waveformInput.addEventListener("change", () => {
-        if (!oscillator) return;
-
-        const mode = waveformInput.value;
-
-        if (mode === "parabola") {
-            oscillator.type = "triangle";
-        } else {
-            oscillator.type = mode;
-        }
-    });
-
-    startBtn.addEventListener("click", () => {
-
-        if (oscillator) return;
-
-        const ctx = getAudioContext();
-
-        oscillator = ctx.createOscillator();
-        gainNode = ctx.createGain();
-
-        oscillator.frequency.value =
-            parseFloat(freqInput.value);
-
-        gainNode.gain.value =
-            volumeInput.value / 100;
-
-        if (waveformInput.value === "parabola") {
-
-            oscillator.type = "triangle";
-
-            waveShaper = ctx.createWaveShaper();
-            waveShaper.curve = createParabolaCurve();
-
-            oscillator.connect(waveShaper);
-            waveShaper.connect(gainNode);
 
         } else {
 
-            oscillator.type =
-                waveformInput.value;
+            this.osc.type =
+                this.waveform;
 
-            oscillator.connect(gainNode);
+            this.osc.connect(
+                this.gain
+            );
         }
 
-        gainNode.connect(ctx.destination);
+        this.gain.connect(
+            ctx.destination
+        );
 
-        oscillator.start();
-    });
+        this.osc.start();
+    }
 
-    stopBtn.addEventListener("click", () => {
+    stop() {
 
-        if (!oscillator) return;
+        if (!this.osc) return;
 
-        oscillator.stop();
+        try {
+            this.osc.stop();
+        } catch {}
 
-        oscillator.disconnect();
+        this.osc.disconnect();
 
-        if (waveShaper) {
-            waveShaper.disconnect();
+        if (this.shaper) {
+            this.shaper.disconnect();
         }
 
-        gainNode.disconnect();
+        this.gain.disconnect();
 
-        oscillator = null;
-        gainNode = null;
-        waveShaper = null;
-    });
-
-    deleteBtn.addEventListener("click", () => {
-
-        if (oscillator) {
-            oscillator.stop();
-        }
-
-        div.remove();
-    });
-
-    document.getElementById("tones")
-        .appendChild(div);
+        this.osc = null;
+    }
 }
 
-document
-    .getElementById("addTone")
-    .addEventListener("click", createToneCard);
+function createTone(
+    frequency,
+    waveform = "sine",
+    volume = 0.1
+) {
 
-createToneCard();
-</script>
+    const tone =
+        new Tone(
+            frequency,
+            waveform,
+            volume
+        );
 
-</body>
-</html>
+    activeTones.push(tone);
+
+    return tone;
+}
+
+function stopAllAudio() {
+
+    activeTones.forEach(t => {
+
+        try {
+            t.stop();
+        } catch {}
+
+    });
+
+    activeTones = [];
+}
+
+function addTone() {
+
+    const card

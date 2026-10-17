@@ -6,7 +6,7 @@
   <style>
     body {
       margin: 0;
-      font-family: "Helvetica World", Helvetica, Arial, sans-serif;
+      font-family: "Arial Rounded MT Bold", sans-serif;
       background-color: #f5f5f5;
       color: #222;
     }
@@ -42,7 +42,7 @@
     .ticker {
       display: inline-block;
       padding: 10px 0;
-      animation: ticker-scroll 20s linear infinite;
+      animation: ticker-scroll 5s linear infinite;
     }
 
     .ticker span {
@@ -85,29 +85,30 @@
 </head>
 <body>
   <header>
-    <h1>Dm2727</h1>
-    <p>if youre in dm2727.github.io do not go. its dm2727.org.uk </p>
+    <h1>The official site of Dm2727</h1>
+    <p>Welcome to Dm2727's website!</p>
   </header>
 
   <div class="ticker-wrapper">
     <div class="ticker">
-      <span>BRO WHAT IS HAPPENING A THUNDERBOLT IN PH?? SIREN MAP 2.0? EVEN A NEW DISCORD SERVER????</span>
+      <span>I get an MS-490 --- Witness-67 UAV now on SimplePlanes --- Are my guppies pregnant?
+      </span>
     </div>
   </div>
 
   <main>
-    <h2>about me</h2>
+    <h2>About me</h2>
 
     <p>
-      um hello there. its Dm2727, who moved in 28 sep 2023 (3 years ago) here you can find some stuff some siren stuff and yes…
+      Dm2727 here. You wouldn't see anything interesting here so please check my links.
     </p>
 
     <p>
-      mario kart stuff
+      In addition to siren content, I have Mario Kart and Rhythm Paradise content as well, so check these 
     </p>
 
     <p>
-      anyways check my other stuff at
+      Links:
       <a href="http://dm2727.org.uk/linkz" target="_blank" rel="noopener noreferrer">
         http://dm2727.org.uk/linkz
       </a>

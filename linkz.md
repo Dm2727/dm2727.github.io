@@ -1,8 +1,58 @@
-<a href="https://www.youtube.com/@realDm2727" 
-</a>
-<a href="http://dm2727.org.uk/tone"
-</a>
-<a href="https://www.reddit.com/user/realDm2727"
-</a>
-<a href="http://dm2727.org.uk/clock" 
-</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Links</title>
+    <style>
+        body {
+            font-family: Montserrat, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: #f4f4f4;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #0078d4;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 18px;
+        }
+
+        .button:hover {
+            background: #005ea2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dm2727's linkz</h1>
+        <p>Click below to visit my favourite site.</p>
+        <a href="https://www.youtube.com/@realDm2727" class="button" target="_blank">
+            YouTube
+        <a href="https://www.reddit.com/user/realDm2727" class="button" target="_blank">
+            Reddit
+        <a href="https://www.simpleplanes.com/u/Dm2727" class="button" target="_blank">
+            SimplePlanes
+        <a href="https://www.reddit.com/r/PhilippineSirens" class="button" target="_blank>
+            r/PhilippineSirens
+        <a href="http://dm2727.org.uk/clock" class="button" target="_blank>
+            TWclock
+        <a href="http://dm2727.org.uk/tonegen" class="button" target="_blank>
+            ToneGen
+          <a href="https://earth.google.com/earth/d/1DpxpyOeftstfgWK8FS2tqBJ_yvz_t_cV" class="button" target="_blank>
+            Dm2727's Philippine Siren Map
+        </a>
+    </div>
+</body>
+</html>

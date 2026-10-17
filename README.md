@@ -6,7 +6,7 @@
   <style>
     body {
       margin: 0;
-      font-family: "Arial Rounded MT Bold", sans-serif;
+      font-family: "Montserrat", sans-serif;
       background-color: #f5f5f5;
       color: #222;
     }

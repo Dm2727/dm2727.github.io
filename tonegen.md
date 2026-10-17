@@ -8,7 +8,7 @@
 <style>
 
 body{
-    font-family:Arial,sans-serif;
+    font-family:Montserrat,sans-serif;
     max-width:1200px;
     margin:auto;
     padding:20px;
@@ -51,7 +51,7 @@ input[type=range]{
 </head>
 <body>
 
-<h1>ToneGen 1.2.1</h1>
+<h1>ToneGen 1.2.2</h1>
 
 <button onclick="addTone()">Add Tone</button>
 <button onclick="stopAll()">Stop All</button>

@@ -7,7 +7,7 @@
 
 <style>
 body{
-    font-family:Arial,sans-serif;
+    font-family:Montserrat,sans-serif;
     background:#1a1a1a;
     color:white;
     text-align:center;
@@ -80,7 +80,7 @@ button{
 </head>
 <body>
 
-<h1>rng 1.0.0</h1>
+<h1>Random Name Picker 1.0.1</h1>
 
 <div id="entries"></div>
 

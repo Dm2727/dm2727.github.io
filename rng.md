@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    https://fonts.googleapis.com
+https://fonts.gstatic.com
+https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>rng</title>
@@ -80,7 +83,7 @@ button{
 </head>
 <body>
 
-<h1>Random Name Picker 1.0.1</h1>
+<h1>rng 1.0.2</h1>
 
 <div id="entries"></div>
 

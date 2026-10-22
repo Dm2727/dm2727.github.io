@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  https://fonts.googleapis.com
+https://fonts.gstatic.com
+https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap
   <meta charset="UTF-8" />
-  <title>TWclock 3.0</title>
-
-  <!-- Montserrat font -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-
+  <title>clock</title>
   <style>
     * {
       margin: 0;
@@ -16,12 +15,12 @@
 
     body {
       height: 100vh;
-      display: flex;
+      display: flex;Ope
       align-items: center;
       justify-content: center;
       background: #0f0c29;
       color: #ffffff;
-      font-family: "Montserrat", sans-serif;
+      font-family: "Open Sans", sans-serif;
     }
 
     .clock {
